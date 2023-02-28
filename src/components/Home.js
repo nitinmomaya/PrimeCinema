@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
-import { selectUser } from "../slice/userSlice";
+import HeroSection from "./HeroSection";
 
 const Home = () => {
-  const user = useSelector(selectUser);
-
-  const name = user ? user.name : "";
   return (
     <>
-      <h1>{`Welcome ${name},to Prime Cinema`}</h1>
+      <HeroSection />
+      <div className="w-full h-[900px] bg-slate-900 overflow-hidden">
+        <h1 className=" px-40 text-white">hii</h1>
+      </div>
     </>
   );
 };

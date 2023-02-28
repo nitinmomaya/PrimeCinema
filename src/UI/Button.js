@@ -3,7 +3,7 @@ const Button = ({ name }) => {
     <>
       <button
         type="submit"
-        className="w-full px-4 py-4 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-500"
+        className="w-full px-4 py-4 rounded-md bg-black text-white font-semibold hover:bg-black/90"
       >
         {name}
       </button>

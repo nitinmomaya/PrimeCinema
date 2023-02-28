@@ -16,10 +16,10 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="w-full px-28 flex justify-between">
-        <h1>PrimeCinema</h1>
+      <div className="w-full z-50 font-display backdrop-blur bg-slate-900/25 px-40 py-6 flex justify-between items-center fixed">
+        <h1 className="text-slate-50 font-semibold text-2xl">PrimeCinema</h1>
         <button
-          className="p-8 bg-red-500 text-white rounded-md"
+          className="px-4 py-2 bg-black  font-medium text-white rounded-md"
           onClick={handleLogout}
         >
           Logout

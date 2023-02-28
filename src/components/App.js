@@ -1,36 +1,38 @@
 import React, { useEffect } from "react";
-
-import { createBrowserRouter, useNavigate } from "react-router-dom";
+import { fetchAPI } from "../utils/api";
+import { createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./Home";
 import Navbar from "./Navbar";
-import { onAuthStateChanged, auth } from "../../firebase";
-import { login, logout } from "../slice/userSlice";
+
+import authchanged from "../utils/authchanged";
 import { useDispatch } from "react-redux";
+import { getApiConfiguration } from "../slice/homeSlice";
 
 const App = () => {
   const dispatch = useDispatch();
   // check at page load if a user is authenticated
+
+  authchanged();
   useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
-      if (userAuth) {
-        // user is logged in, send the user's details to redux, store the current user in the state
-        console.log(userAuth);
-        dispatch(
-          login({
-            email: userAuth.email,
-            name: userAuth.displayName,
-          })
-        );
-        localStorage.setItem("primeCinemaUser", true);
-      } else {
-        // dispatch(logout());
-        localStorage.removeItem("primeCinemaUser");
-      }
+    fetchApiConfig();
+  }, []);
+
+  const fetchApiConfig = () => {
+    fetchAPI("/configuration").then((res) => {
+      console.log(res);
+
+      const url = {
+        backdrop: res?.images?.secure_base_url + "original",
+        poster: res?.images?.secure_base_url + "original",
+        profile: res?.images?.secure_base_url + "original",
+      };
+      dispatch(getApiConfiguration(url));
     });
-  }, [Home, Login]);
+  };
+
   return (
     <>
       <Navbar />

@@ -1,18 +1,14 @@
-import {
-  auth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from "../../firebase";
-
+import { auth, signInWithEmailAndPassword } from "../../firebase";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, logout } from "../slice/userSlice";
+import { login } from "../slice/userSlice";
 
 import Button from "../UI/Button";
 import GoogleButton from "../UI/GoogleButton";
 import Input from "../UI/Input";
+import authchanged from "../utils/authchanged";
 
 const Login = () => {
   const initialValues = {
@@ -25,25 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  // check at page load if a user is authenticated
-  useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
-      if (userAuth) {
-        // user is logged in, send the user's details to redux, store the current user in the state
-        console.log(userAuth);
-        dispatch(
-          login({
-            email: userAuth.email,
-            name: userAuth.displayName,
-          })
-        );
-        localStorage.setItem("primeCinemaUser", true);
-      } else {
-        // dispatch(logout());
-        localStorage.removeItem("primeCinemaUser", true);
-      }
-    });
-  }, []);
+  authchanged();
 
   const handleLogin = (email, password) => {
     // Sign in an existing user with Firebase
@@ -104,7 +82,7 @@ const Login = () => {
               </div>
 
               <Link to="/signup">
-                <button className="px-4 py-2 border-[1px] rounded-md border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white ">
+                <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
                   Signup
                 </button>
               </Link>

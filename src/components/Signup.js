@@ -90,7 +90,7 @@ const Signup = () => {
               </div>
 
               <Link to="/login">
-                <button className="px-4 py-2 border-[1px] rounded-md border-blue-700 text-blue-700 font-semibold hover:bg-blue-700 hover:text-white ">
+                <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
                   Login
                 </button>
               </Link>
