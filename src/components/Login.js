@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../slice/userSlice";
-
 import Button from "../UI/Button";
 import GoogleButton from "../UI/GoogleButton";
 import Input from "../UI/Input";
@@ -57,66 +56,64 @@ const Login = () => {
 
   return (
     <>
-      <div className="w-screen h-screen bg-login-background bg-cover font-display relative">
-        <div className="w-full px-28 flex justify-between absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="flex flex-col text-white w-[45%] space-y-6">
-            <h1 className="font-semibold text-5xl">
-              Looking for Good Movie Recommendation to watch?
-            </h1>
-            <p className=" text-2xl ">
-              Find the latest and greatest Movie and Shows all available on
-              PrimeCinema
-            </p>
-          </div>
-          <div className="w-1/3 bg-white rounded-md p-8">
-            <div className="flex justify-between items-center mb-6">
-              <div className="flex flex-col">
-                <h1 className="text-neutral-900 font-semibold text-2xl">
-                  Login Here
-                </h1>
-                {error && (
-                  <p className="text-red-600 font-display font-semibold">
-                    {error}
-                  </p>
-                )}
-              </div>
-
-              <Link to="/signup">
-                <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
-                  Signup
-                </button>
-              </Link>
+      <div className=" w-full  flex xl:flex-row flex-col xl:px-28 sm:px-12 px-8 py-8  justify-between items-center xl:h-screen h-full space-y-6 bg-login-background bg-cover font-display ">
+        <div className="flex flex-col text-white xl:w-1/2 w-full  sm:space-y-6 space-y-2">
+          <h1 className="font-semibold sm:text-5xl text-xl ">
+            Looking for Good Movie Recommendation to watch?
+          </h1>
+          <p className=" sm:text-2xl text-md">
+            Find the latest and greatest Movie and Shows all available on
+            PrimeCinema
+          </p>
+        </div>
+        <div className="xl:w-1/3 w-full h-fit bg-white rounded-md sm:p-8 p-6">
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col">
+              <h1 className="text-neutral-900 font-semibold text-2xl">
+                Login Here
+              </h1>
+              {error && (
+                <p className="text-red-600 font-display font-semibold">
+                  {error}
+                </p>
+              )}
             </div>
 
-            <form onSubmit={handleSubmit}>
-              <Input
-                label={"Email"}
-                name={"email"}
-                type={"email"}
-                value={values.email}
-                touched={touched.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                errors={errors.email}
-                placeholder={"Enter Email"}
-              />
-              <Input
-                label={"Password"}
-                name={"password"}
-                type={"password"}
-                value={values.password}
-                touched={touched.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                errors={errors.password}
-                icon={true}
-                placeholder={"Enter Password"}
-              />
-
-              <Button name={"Login Now"} />
-            </form>
-            <GoogleButton />
+            <Link to="/signup">
+              <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
+                Signup
+              </button>
+            </Link>
           </div>
+
+          <form onSubmit={handleSubmit}>
+            <Input
+              label={"Email"}
+              name={"email"}
+              type={"email"}
+              value={values.email}
+              touched={touched.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errors={errors.email}
+              placeholder={"Enter Email"}
+            />
+            <Input
+              label={"Password"}
+              name={"password"}
+              type={"password"}
+              value={values.password}
+              touched={touched.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              errors={errors.password}
+              icon={true}
+              placeholder={"Enter Password"}
+            />
+
+            <Button name={"Login Now"} />
+          </form>
+          <GoogleButton />
         </div>
       </div>
     </>

@@ -9,7 +9,8 @@ import Navbar from "./Navbar";
 
 import authchanged from "../utils/authchanged";
 import { useDispatch } from "react-redux";
-import { getApiConfiguration } from "../slice/homeSlice";
+import { getApiConfiguration, getGenres } from "../slice/homeSlice";
+import Footer from "./Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const App = () => {
   authchanged();
   useEffect(() => {
     fetchApiConfig();
+    fetchGenres();
   }, []);
 
   const fetchApiConfig = () => {
@@ -32,11 +34,30 @@ const App = () => {
       dispatch(getApiConfiguration(url));
     });
   };
+  const fetchGenres = async () => {
+    let promises = [];
+    let endPoints = ["tv", "movie"];
+    let allGenres = {};
 
+    endPoints.forEach((endPoint) => {
+      promises.push(fetchAPI(`/genre/${endPoint}/list`));
+    });
+
+    const data = await Promise.all(promises);
+    console.log("Data from Promise.all", data);
+
+    data.map(({ genres }) => {
+      return genres.map((genre, index) => (allGenres[genre.id] = genre));
+    });
+    console.log("ALL", allGenres);
+
+    dispatch(getGenres(allGenres));
+  };
   return (
     <>
       <Navbar />
       <Home />
+      <Footer />
     </>
   );
 };

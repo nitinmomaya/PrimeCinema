@@ -1,7 +1,6 @@
 import { FiSearch } from "react-icons/fi";
 
 const HeroSearch = ({ change, value }) => {
-  console.log(value);
   return (
     <>
       <form className="w-full flex relative rounded-full border-none my-8 ">
@@ -14,7 +13,7 @@ const HeroSearch = ({ change, value }) => {
           placeholder="Search movies, show etc..."
         />
 
-        <button className=" bg-black px-8 h-full rounded-full absolute -right-2 text-slate-50 font-semibold">
+        <button className=" bg-slate-900 hover:bg-slate-900/50 px-8 h-full rounded-full absolute -right-1 text-slate-50 font-semibold">
           Search
         </button>
       </form>
