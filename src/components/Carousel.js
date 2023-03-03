@@ -2,9 +2,10 @@ import dayjs from "dayjs";
 import { useRef } from "react";
 import { FiArrowLeft, FiArrowRight, FiStar } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Genres from "./Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
   const carouselRef = useRef();
   const { url } = useSelector((state) => state.home);
 
@@ -49,31 +50,36 @@ const Carousel = ({ data, loading }) => {
                 ? url?.poster + item.poster_path
                 : "";
               return (
-                <div key={item.id} className=" w-40 flex-shrink-0 relative">
-                  <div className=" w-full flex justify-between  ">
-                    <img
-                      loading="lazy"
-                      className="w-full h-full rounded-lg object-cover object-center "
-                      src={posterUrl}
-                      alt={item.title || item.name}
-                    />
+                <Link
+                  key={item.id}
+                  to={`/${item.media_type || endpoint}/${item.id}`}
+                >
+                  <div className=" w-48 flex-shrink-0 relative">
+                    <div className=" w-full flex justify-between  ">
+                      <img
+                        loading="lazy"
+                        className="w-full h-full rounded-lg object-cover object-center "
+                        src={posterUrl}
+                        alt={item.title || item.name}
+                      />
+                    </div>
+                    <div className=" flex flex-col text-slate-50 space-y-2 ">
+                      <div className="py-2 px-2 gap-2 font-semibold items-center justify-center flex rounded-tr-md absolute backdrop-blur  bg-slate-900/50 top-0 right-0">
+                        <FiStar className="w-4 h-4 fill-white " />
+                        {item.vote_average.toFixed(1)}
+                      </div>
+                      <Genres data={item?.genre_ids.slice(0, 1)} />
+                      <div className="text-lg font-semibold">
+                        {item.title || item.name}
+                      </div>
+                      <div className="title text-slate-400">
+                        {dayjs(item.first_air_date || item.release_date).format(
+                          "MMM D, YYYY"
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div className=" flex flex-col text-slate-50 space-y-2 ">
-                    <div className="py-2 px-2 gap-2 font-semibold items-center justify-center flex rounded-tr-md absolute backdrop-blur  bg-slate-900/50 top-0 right-0">
-                      <FiStar className="w-4 h-4 fill-white " />
-                      {item.vote_average.toFixed(1)}
-                    </div>
-                    <Genres data={item?.genre_ids.slice(0, 1)} />
-                    <div className="text-lg font-semibold">
-                      {item.title || item.name}
-                    </div>
-                    <div className="title text-slate-400">
-                      {dayjs(item.first_air_date || item.release_date).format(
-                        "MMM D, YYYY"
-                      )}
-                    </div>
-                  </div>
-                </div>
+                </Link>
               );
             })}
           </div>

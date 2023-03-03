@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 const Genres = ({ data }) => {
   const { genres } = useSelector((state) => state.home);
-  console.log(data);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { fetchAPI } from "../utils/api";
-import { createBrowserRouter } from "react-router-dom";
+
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import ProtectedRoute from "./ProtectedRoute";
@@ -11,6 +11,11 @@ import authchanged from "../utils/authchanged";
 import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "../slice/homeSlice";
 import Footer from "./Footer";
+import Error from "../Error/Error";
+import Details from "./Details";
+import SearchResult from "./SearchResult";
+import Explore from "./Explore";
+import { fetchAPI } from "../utils/fetchAPI";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,7 +61,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Home />
+      <Outlet />
       <Footer />
     </>
   );
@@ -65,11 +70,18 @@ const App = () => {
 export const appRouter = createBrowserRouter([
   {
     path: "/",
+    errorElement: <Error />,
     element: (
       <ProtectedRoute>
         <App />
       </ProtectedRoute>
     ),
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/:mediaType/:id", element: <Details /> },
+      { path: "/search/:searchValue", element: <SearchResult /> },
+      { path: "/search/:mediaType", element: <Explore /> },
+    ],
   },
 
   {
