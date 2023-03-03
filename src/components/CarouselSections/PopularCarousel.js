@@ -26,7 +26,7 @@ const PopularCarousel = () => {
         />
       </div>
 
-      <Carousel data={data?.results} loading={loading} />
+      <Carousel data={data?.results} endpoint={tab} loading={loading} />
     </>
   );
 };
