@@ -2,13 +2,19 @@ import dayjs from "dayjs";
 import { FiStar } from "react-icons/fi";
 import Genres from "../components/Genres";
 
-const MovieCard = ({ posterUrl, title, vote, date, genre }) => {
+const MovieCard = ({ posterUrl, title, vote, date, genre, explore }) => {
   return (
-    <div className=" sm:w-48 w-full  flex-shrink-0 relative font-display">
+    <div
+      className={
+        explore === true
+          ? "w-full sm:w-48 flex-shrink-0 relative font-display"
+          : "w-48 flex-shrink-0 relative font-display"
+      }
+    >
       <div className="w-full flex justify-between ">
         <img
           loading="lazy"
-          className="w-full h-full rounded-lg object-cover object-center "
+          className="w-full h-max rounded-lg object-cover object-center "
           src={posterUrl}
           alt={title}
         />

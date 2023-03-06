@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Select from "react-select";
 import { sortByData } from "../contant";
 import MovieCard from "../UI/MovieCard";
@@ -81,10 +81,10 @@ const Explore = () => {
     <>
       <div className="w-full xl:px-60 px-8 py-4 flex flex-col pt-20 bg-slate-900 font-display">
         <div className="flex w-full sm:flex-row flex-col sm:justify-between py-8">
-          <div className="text-slate-50 text-xl font-semibold">
+          <div className="text-slate-50 text-xl font-semibold w-full">
             {mediaType === "tv" ? "Explore TV Shows" : "Explore Movies"}
           </div>
-          <div className="flex gap-4 sm:w-fit w-full sm:justify-between py-4 sm:py-0">
+          <div className="flex sm:flex-row flex-col gap-2 w-full justify-end py-4 sm:py-0">
             <Select
               isMulti
               name="genres"
@@ -95,7 +95,7 @@ const Explore = () => {
               getOptionValue={(option) => option?.id}
               onChange={onChange}
               placeholder="Select genres"
-              className=" sm:w-60 w-36  "
+              className="w-full"
             />
             <Select
               name="sortby"
@@ -104,7 +104,7 @@ const Explore = () => {
               onChange={onChange}
               isClearable={true}
               placeholder="Sort by"
-              className=" sm:w-60 w-36 "
+              className="w-full"
             />
           </div>
         </div>
@@ -125,14 +125,20 @@ const Explore = () => {
                     ? url?.poster + item.poster_path
                     : "";
                   return (
-                    <MovieCard
+                    <Link
                       key={item.id}
-                      posterUrl={posterUrl}
-                      title={item?.title || item?.name}
-                      vote={item?.vote_average}
-                      genre={item?.genre_ids}
-                      date={item?.first_air_date || item?.release_date}
-                    />
+                      to={`/${item.media_type || mediaType}/${item.id}`}
+                    >
+                      <MovieCard
+                        key={item.id}
+                        posterUrl={posterUrl}
+                        title={item?.title || item?.name}
+                        vote={item?.vote_average}
+                        genre={item?.genre_ids}
+                        date={item?.first_air_date || item?.release_date}
+                        explore={true}
+                      />
+                    </Link>
                   );
                 })}
               </InfiniteScroll>

@@ -118,12 +118,12 @@ const Navbar = () => {
           }
         >
           <ul className=" sm:hidden flex flex-col space-y-6">
-            <Link to="/">
+            <Link to="/explore/movie">
               <li className="font-display text-slate-50 font-semibold hover:text-slate-700">
                 Movies
               </li>
             </Link>
-            <Link to="/">
+            <Link to="/explore/tv">
               <li className="font-display text-slate-50 font-semibold hover:text-slate-700">
                 TV Shows
               </li>

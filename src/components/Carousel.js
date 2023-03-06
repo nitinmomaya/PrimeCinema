@@ -1,10 +1,9 @@
-import dayjs from "dayjs";
 import { useRef } from "react";
-import { FiArrowLeft, FiArrowRight, FiStar } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import noImage from "../Assest/NoImage.png";
 import MovieCard from "../UI/MovieCard";
-import Genres from "./Genres";
 
 const Carousel = ({ data, loading, endpoint }) => {
   const carouselRef = useRef();
@@ -49,7 +48,7 @@ const Carousel = ({ data, loading, endpoint }) => {
             {data?.map((item) => {
               const posterUrl = item?.poster_path
                 ? url?.poster + item.poster_path
-                : "";
+                : noImage;
               return (
                 <Link
                   key={item.id}

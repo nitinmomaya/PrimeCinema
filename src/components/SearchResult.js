@@ -7,7 +7,7 @@ import { fetchAPI } from "../utils/fetchAPI";
 import SearchHeroSection from "./SearchHeroSection";
 const SearchResult = () => {
   const [data, setData] = useState(null);
-  const [backGround, setBackGround] = useState("");
+
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
   const { searchValue } = useParams();
@@ -40,26 +40,16 @@ const SearchResult = () => {
   };
 
   useEffect(() => {
-    const bground =
-      url?.backdrop +
-      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
-    setBackGround(bground);
     setPageNum(1);
     fetchInitialData();
   }, [searchValue]);
 
-  console.log(
-    "back",
-    backGround,
-    url.backdrop +
-      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path
-  );
   return (
     <>
       {!loading && data?.results?.length > 0 ? (
         <div className="w-full flex flex-col  font-display bg-slate-900">
           <div>
-            <SearchHeroSection bground={backGround} />
+            <SearchHeroSection data={data} loading={loading} />
             <h1 className="text-slate-50 text-xl  pb-4 bg-slate-900 xl:px-60 px-8 gap-10">
               {`Search ${
                 data?.total_results > 1 ? "results" : "result"

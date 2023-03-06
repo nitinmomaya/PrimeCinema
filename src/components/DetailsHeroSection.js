@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiPlay, FiStar } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { noImage } from "../contant";
 import useFetch from "../utils/useFetch";
 import Genres from "./Genres";
 import VideoPlayer from "./VideoPlayer";
@@ -52,10 +53,7 @@ const DetailsHeroSection = ({ video, crew }) => {
                   </div>
                 </div>
               ) : (
-                <img
-                  className="sm:w-80 w-full  rounded-lg"
-                  src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
-                />
+                <img className="sm:w-80 w-full  rounded-lg" src={noImage} />
               )}
             </div>
 

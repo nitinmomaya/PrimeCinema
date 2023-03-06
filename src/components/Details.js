@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../utils/useFetch";
 import Carousel from "./Carousel";
-import TrendingCarousel from "./CarouselSections/TrendingCarousel";
 import DetailsHeroSection from "./DetailsHeroSection";
 import TopCast from "./TopCast";
 
@@ -35,7 +34,7 @@ const Details = () => {
             endpoint={mediaType}
           />
         </div>
-        <div className="w-full h-full xl:px-60 px-8 py-0 bg-slate-900 font-display">
+        <div>
           <h1 className="text-slate-50 font-semibold text-xl ">Similar </h1>
           <Carousel
             data={similar?.results}

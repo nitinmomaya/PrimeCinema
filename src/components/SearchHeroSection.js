@@ -1,9 +1,24 @@
-import useFetch from "../utils/useFetch";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import HeroSearch from "./HeroSearch";
 
-const SearchHeroSection = ({ bground }) => {
-  const { data, loading } = useFetch("/movie/upcoming");
+const SearchHeroSection = ({ data, loading }) => {
+  console.log("ser", data);
+  const [backGround, setBackGround] = useState("");
+  const { url } = useSelector((state) => state.home);
 
+  useEffect(() => {
+    const bground =
+      url?.backdrop +
+      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
+    setBackGround(bground);
+    console.log(
+      "vg",
+      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path
+    );
+  }, [data]);
+  console.log("vg2", backGround);
   return (
     <>
       <div className="  w-full h-[50vh]   xl:px-60 px-8  overflow-hidden bg-slate-900  flex justify-center items-center   relative font-display ">
@@ -12,7 +27,7 @@ const SearchHeroSection = ({ bground }) => {
           {!loading && (
             <img
               loading="lazy"
-              src={bground}
+              src={backGround}
               className="w-full h-full object-cover"
               alt="hero-image"
             />

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
-
+import noImage from "../Assest/NoImage.png";
 const TopCast = ({ data, loading }) => {
   const carouselRef = useRef();
   const { url } = useSelector((state) => state.home);
@@ -43,8 +43,8 @@ const TopCast = ({ data, loading }) => {
           {data?.map((credit) => {
             const imgurl = credit?.profile_path
               ? url?.profile + credit?.profile_path
-              : "";
-
+              : noImage;
+            console.log("img url 1,", imgurl);
             return (
               <div key={credit.id} className=" w-48 flex-shrink-0 relative ">
                 <div className="w-full flex justify-between ">
