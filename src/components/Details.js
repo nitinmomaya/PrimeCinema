@@ -35,7 +35,7 @@ const Details = () => {
             endpoint={mediaType}
           />
         </div>
-        <div>
+        <div className="w-full h-full xl:px-60 px-8 py-0 bg-slate-900 font-display">
           <h1 className="text-slate-50 font-semibold text-xl ">Similar </h1>
           <Carousel
             data={similar?.results}

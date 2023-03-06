@@ -46,7 +46,7 @@ const TopCast = ({ data, loading }) => {
               : "";
 
             return (
-              <div className=" w-48 flex-shrink-0 relative ">
+              <div key={credit.id} className=" w-48 flex-shrink-0 relative ">
                 <div className="w-full flex justify-between ">
                   <img
                     loading="lazy"

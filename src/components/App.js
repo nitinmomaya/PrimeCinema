@@ -80,7 +80,7 @@ export const appRouter = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/:mediaType/:id", element: <Details /> },
       { path: "/search/:searchValue", element: <SearchResult /> },
-      { path: "/search/:mediaType", element: <Explore /> },
+      { path: "/explore/:mediaType", element: <Explore /> },
     ],
   },
 

@@ -4,8 +4,8 @@ import Genres from "../components/Genres";
 
 const MovieCard = ({ posterUrl, title, vote, date, genre }) => {
   return (
-    <div className=" sm:w-48 w-full flex-shrink-0 relative font-display">
-      <div className=" w-full  ">
+    <div className=" sm:w-48 w-full  flex-shrink-0 relative font-display">
+      <div className="w-full flex justify-between ">
         <img
           loading="lazy"
           className="w-full h-full rounded-lg object-cover object-center "
@@ -13,7 +13,7 @@ const MovieCard = ({ posterUrl, title, vote, date, genre }) => {
           alt={title}
         />
       </div>
-      <div className=" flex flex-col text-slate-50 space-y-2 ">
+      <div className=" flex flex-col  text-slate-50 space-y-2 ">
         <div className="py-2 px-2 gap-2 font-semibold items-center justify-center flex rounded-tr-md absolute backdrop-blur  bg-slate-900/50 top-0 right-0">
           <FiStar className="w-4 h-4 fill-white " />
           {vote.toFixed(1)}

@@ -21,7 +21,7 @@ const DetailsHeroSection = ({ video, crew }) => {
 
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
-
+  const imgurl = url?.backdrop + data?.backdrop_path;
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
@@ -35,11 +35,7 @@ const DetailsHeroSection = ({ video, crew }) => {
         <div className=" w-full flex flex-col relative h-full font-display ">
           <div className="backdrop-img  h-full w-full absolute z-10">
             <div className="opacity-layer bg-gradient-to-t from-slate-900 absolute top-0 w-full h-full z-20"></div>
-            <img
-              className="w-full h-full object-cover"
-              src={url?.backdrop + data?.backdrop_path}
-              alt=""
-            />
+            <img className="w-full h-full object-cover" src={imgurl} alt="" />
           </div>
 
           <div className="flex sm:flex-row flex-col gap-10 w-full   xl:px-60 px-8 py-32">
@@ -56,7 +52,10 @@ const DetailsHeroSection = ({ video, crew }) => {
                   </div>
                 </div>
               ) : (
-                <img src="" />
+                <img
+                  className="sm:w-80 w-full  rounded-lg"
+                  src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+                />
               )}
             </div>
 

@@ -68,12 +68,12 @@ const Navbar = () => {
             </h1>
           </Link>
           <ul className="sm:flex sm:items-center md:space-x-12 sm:space-x-4 hidden">
-            <Link to="/">
+            <Link to="/explore/movie">
               <li className="font-display text-slate-50 font-semibold hover:text-slate-700">
                 Movies
               </li>
             </Link>
-            <Link to="/">
+            <Link to="/explore/tv">
               <li className="font-display text-slate-50 font-semibold hover:text-slate-700">
                 TV Shows
               </li>
