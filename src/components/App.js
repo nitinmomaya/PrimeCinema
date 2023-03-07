@@ -5,14 +5,12 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import { fetchAPI } from "../utils/fetchAPI";
 import authchanged from "../utils/authchanged";
 import Login from "./Login";
-import NavShimmer from "../Shimmer/NavShimmer";
-import FootShimmer from "../Shimmer/FootShimmer";
 import AppShimmer from "../Shimmer/AppShimmer";
 const Signup = lazy(() => import("./Signup"));
 const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
 const Home = lazy(() => import("./Home"));
-const Navbar = lazy(() => import("./Navbar"));
-const Footer = lazy(() => import("./Footer"));
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 const Error = lazy(() => import("../Error/Error"));
 const Details = lazy(() => import("./Details"));
 const SearchResult = lazy(() => import("./SearchResult"));
@@ -61,13 +59,11 @@ const App = () => {
   };
   return (
     <>
-      <Suspense fallback={<NavShimmer />}>
-        <Navbar />
-      </Suspense>
+      <Navbar />
+
       <Outlet />
-      <Suspense fallback={<FootShimmer />}>
-        <Footer />
-      </Suspense>
+
+      <Footer />
     </>
   );
 };

@@ -7,6 +7,7 @@ const MovieCard = lazy(() => import("../UI/MovieCard"));
 const SearchHeroSection = lazy(() => import("./SearchHeroSection"));
 import noImage from "../Assest/NoImage.png";
 import HeroShimmer from "../Shimmer/HeroShimmer";
+import SearchError from "../Error/SearchError";
 const SearchResult = () => {
   const [data, setData] = useState(null);
 
@@ -94,7 +95,7 @@ const SearchResult = () => {
           </InfiniteScroll>
         </div>
       ) : (
-        <div className="pt-80 text-slate-90">Sorry, Results not found!</div>
+        <SearchError />
       )}
     </>
   );

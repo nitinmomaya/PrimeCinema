@@ -3,6 +3,7 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import noImage from "../Assest/NoImage.png";
+import CarouselShimmer from "../Shimmer/CarouselShimmer";
 const MovieCard = lazy(() => import("../UI/MovieCard"));
 
 const Carousel = ({ data, loading, endpoint }) => {
@@ -25,7 +26,7 @@ const Carousel = ({ data, loading, endpoint }) => {
   return (
     <>
       {loading ? (
-        <div>loading</div>
+        <CarouselShimmer />
       ) : (
         <div className=" w-full mx-0 my-auto flex justify-between relative">
           <div
@@ -55,7 +56,7 @@ const Carousel = ({ data, loading, endpoint }) => {
                   to={`/${item.media_type || endpoint}/${item.id}`}
                 >
                   <Suspense
-                    fallback={<div className="w-40 h-28 bg-slate-500"></div>}
+                    fallback={<div className="w-40 h-80 bg-slate-500"></div>}
                   >
                     <MovieCard
                       posterUrl={posterUrl}

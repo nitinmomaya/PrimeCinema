@@ -24,7 +24,11 @@ const HeroSection = () => {
     setBackGround(bground);
   }, [data]);
 
-  const name = user?.name;
+  const name = loading ? (
+    <div className="w-80 h-10 bg-slate-800"></div>
+  ) : (
+    `Welcome ${user?.name}`
+  );
 
   return (
     <>
@@ -41,7 +45,9 @@ const HeroSection = () => {
           )}
         </div>
         <div className=" xl:px-40 sm:px-20 px-8 flex flex-col items-center absolute justify-center z-30">
-          <h1 className="text-4xl text-center text-slate-50 font-semibold">{`Welcome ${name},`}</h1>
+          <h1 className="text-4xl text-center text-slate-50 font-semibold">
+            {name}
+          </h1>
           <p className="text-xl py-2 text-slate-100 text-center ">
             Find the latest and greatest Movie and Shows all available on
             PrimeCinema

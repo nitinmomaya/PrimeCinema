@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
+import CarouselShimmer from "../../Shimmer/CarouselShimmer";
 import SwitchTabs from "../../UI/SwitchTabs";
 import useFetch from "../../utils/useFetch";
-import Carousel from "../Carousel";
+const Carousel = lazy(() => import("../Carousel"));
 
 const TrendingCarousel = () => {
   const [tab, setTab] = useState("day");
@@ -25,8 +26,9 @@ const TrendingCarousel = () => {
           endPoint={tab}
         />
       </div>
-
-      <Carousel data={data?.results} endpoint={tab} loading={loading} />
+      <Suspense fallback={<CarouselShimmer />}>
+        <Carousel data={data?.results} endpoint={tab} loading={loading} />
+      </Suspense>
     </>
   );
 };

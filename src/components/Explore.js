@@ -7,7 +7,9 @@ import { sortByData } from "../contant";
 import { fetchAPI } from "../utils/fetchAPI";
 import useFetch from "../utils/useFetch";
 import noImage from "../Assest/NoImage.png";
+import AppShimmer from "../Shimmer/AppShimmer";
 const MovieCard = lazy(() => import("../UI/MovieCard"));
+const SearchError = lazy(() => import("../Error/SearchError"));
 let filters = {};
 
 const Explore = () => {
@@ -108,7 +110,7 @@ const Explore = () => {
             />
           </div>
         </div>
-        {loading && <h1>Loading..</h1>}
+        {loading && <AppShimmer />}
         {!loading && (
           <>
             {data?.results?.length > 0 ? (
@@ -129,7 +131,11 @@ const Explore = () => {
                       key={item.id}
                       to={`/${item.media_type || mediaType}/${item.id}`}
                     >
-                      <Suspense fallback={<h1>Card...</h1>}>
+                      <Suspense
+                        fallback={
+                          <div className="w-40 h-80 bg-slate-500"></div>
+                        }
+                      >
                         <MovieCard
                           key={item.id}
                           posterUrl={posterUrl}
@@ -145,7 +151,7 @@ const Explore = () => {
                 })}
               </InfiniteScroll>
             ) : (
-              <div>Sorry, Results not found!</div>
+              <SearchError />
             )}
           </>
         )}

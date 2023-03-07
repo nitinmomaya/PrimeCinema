@@ -25,7 +25,7 @@ const MovieCard = ({ posterUrl, title, vote, date, genre, explore }) => {
           <FiStar className="w-4 h-4 fill-white " />
           {vote.toFixed(1)}
         </div>
-        <Suspense fallback={<h1>Loading..</h1>}>
+        <Suspense fallback={<div className="w-8 h-2 bg-slate-50"></div>}>
           <Genres data={genre.slice(0, 1)} />
         </Suspense>
         <div className="text-lg font-semibold">{title}</div>
