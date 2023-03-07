@@ -17,7 +17,7 @@ const Footer = () => {
               Contact Us
             </li>
             <li className="font-display text-slate-400 text-md pb-2 font-semibold hover:text-slate-600 cursor-pointer">
-              ApnaMart Stories
+              PrimeCinema Stories
             </li>
           </ul>
         </div>

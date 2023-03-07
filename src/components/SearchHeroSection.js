@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import SearchShimmer from "../Shimmer/SearchShimmer";
 
 const HeroSearch = lazy(() => import("./HeroSearch"));
 
@@ -38,7 +39,7 @@ const SearchHeroSection = ({ data, loading }) => {
             Search any Movie and Shows all available on PrimeCinema
           </p>
 
-          <Suspense fallback={<h1>Loading..</h1>}>
+          <Suspense fallback={<SearchShimmer />}>
             <HeroSearch />
           </Suspense>
         </div>

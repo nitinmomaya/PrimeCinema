@@ -6,6 +6,7 @@ import { fetchAPI } from "../utils/fetchAPI";
 const MovieCard = lazy(() => import("../UI/MovieCard"));
 const SearchHeroSection = lazy(() => import("./SearchHeroSection"));
 import noImage from "../Assest/NoImage.png";
+import HeroShimmer from "../Shimmer/HeroShimmer";
 const SearchResult = () => {
   const [data, setData] = useState(null);
 
@@ -50,7 +51,7 @@ const SearchResult = () => {
       {!loading && data?.results?.length > 0 ? (
         <div className="w-full flex flex-col  font-display bg-slate-900">
           <div>
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense fallback={<HeroShimmer />}>
               <SearchHeroSection data={data} loading={loading} />
             </Suspense>
             <h1 className="text-slate-50 text-xl  pb-4 bg-slate-900 xl:px-60 px-8 gap-10">
@@ -76,7 +77,9 @@ const SearchResult = () => {
                   key={item.id}
                   to={`/${item.media_type || endpoint}/${item.id}`}
                 >
-                  <Suspense fallback={<h1>Loading...</h1>}>
+                  <Suspense
+                    fallback={<div className="w-40 h-28 bg-slate-500"></div>}
+                  >
                     <MovieCard
                       posterUrl={posterUrl}
                       title={item?.title || item?.name}

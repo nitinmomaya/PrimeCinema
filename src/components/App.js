@@ -5,6 +5,9 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import { fetchAPI } from "../utils/fetchAPI";
 import authchanged from "../utils/authchanged";
 import Login from "./Login";
+import NavShimmer from "../Shimmer/NavShimmer";
+import FootShimmer from "../Shimmer/FootShimmer";
+import AppShimmer from "../Shimmer/AppShimmer";
 const Signup = lazy(() => import("./Signup"));
 const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
 const Home = lazy(() => import("./Home"));
@@ -58,11 +61,11 @@ const App = () => {
   };
   return (
     <>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<NavShimmer />}>
         <Navbar />
       </Suspense>
       <Outlet />
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<FootShimmer />}>
         <Footer />
       </Suspense>
     </>
@@ -74,7 +77,7 @@ export const appRouter = createBrowserRouter([
     path: "/",
     errorElement: <Error />,
     element: (
-      <Suspense fallback={<h1>Loading..</h1>}>
+      <Suspense fallback={<AppShimmer />}>
         <ProtectedRoute>
           <App />
         </ProtectedRoute>
@@ -84,7 +87,7 @@ export const appRouter = createBrowserRouter([
       {
         path: "/",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<AppShimmer />}>
             <Home />
           </Suspense>
         ),
@@ -92,7 +95,7 @@ export const appRouter = createBrowserRouter([
       {
         path: "/:mediaType/:id",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<AppShimmer />}>
             <Details />
           </Suspense>
         ),
@@ -100,7 +103,7 @@ export const appRouter = createBrowserRouter([
       {
         path: "/search/:searchValue",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<AppShimmer />}>
             <SearchResult />
           </Suspense>
         ),
@@ -108,7 +111,7 @@ export const appRouter = createBrowserRouter([
       {
         path: "/explore/:mediaType",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<AppShimmer />}>
             <Explore />
           </Suspense>
         ),
@@ -124,7 +127,7 @@ export const appRouter = createBrowserRouter([
   {
     path: "/signup",
     element: (
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<AppShimmer />}>
         <Signup />
       </Suspense>
     ),

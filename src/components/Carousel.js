@@ -3,8 +3,8 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import noImage from "../Assest/NoImage.png";
-
 const MovieCard = lazy(() => import("../UI/MovieCard"));
+
 const Carousel = ({ data, loading, endpoint }) => {
   const carouselRef = useRef();
   const { url } = useSelector((state) => state.home);
@@ -54,7 +54,9 @@ const Carousel = ({ data, loading, endpoint }) => {
                   key={item.id}
                   to={`/${item.media_type || endpoint}/${item.id}`}
                 >
-                  <Suspense fallback={<h1>Loading...</h1>}>
+                  <Suspense
+                    fallback={<div className="w-40 h-28 bg-slate-500"></div>}
+                  >
                     <MovieCard
                       posterUrl={posterUrl}
                       title={item?.title || item?.name}

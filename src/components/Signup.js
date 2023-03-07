@@ -4,15 +4,17 @@ import {
   updateProfile,
 } from "../../firebase";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../slice/userSlice";
 
-import Button from "../UI/Button";
-import GoogleButton from "../UI/GoogleButton";
-import Input from "../UI/Input";
+const Button = lazy(() => import("../UI/Button"));
+const GoogleButton = lazy(() => import("../UI/GoogleButton"));
+const Input = lazy(() => import("../UI/Input"));
+import InputShimmer from "../Shimmer/InputShimmer";
+import ButtonShimmer from "../Shimmer/ButtonShimmer";
 
 const Signup = () => {
   const initialValues = {
@@ -100,44 +102,48 @@ const Signup = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <Input
-              label={"Name"}
-              name={"name"}
-              type={"text"}
-              value={values.name}
-              touched={touched.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errors={errors.name}
-              placeholder={"Enter Name"}
-            />
-            <Input
-              label={"Email"}
-              name={"email"}
-              type={"email"}
-              value={values.email}
-              touched={touched.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errors={errors.email}
-              placeholder={"Enter Email"}
-            />
-            <Input
-              label={"Password"}
-              name={"password"}
-              type={"password"}
-              value={values.password}
-              touched={touched.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errors={errors.password}
-              icon={true}
-              placeholder={"Enter Password"}
-            />
+            <Suspense fallback={<InputShimmer />}>
+              <Input
+                label={"Name"}
+                name={"name"}
+                type={"text"}
+                value={values.name}
+                touched={touched.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors.name}
+                placeholder={"Enter Name"}
+              />
+              <Input
+                label={"Email"}
+                name={"email"}
+                type={"email"}
+                value={values.email}
+                touched={touched.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors.email}
+                placeholder={"Enter Email"}
+              />
+              <Input
+                label={"Password"}
+                name={"password"}
+                type={"password"}
+                value={values.password}
+                touched={touched.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors.password}
+                icon={true}
+                placeholder={"Enter Password"}
+              />
 
-            <Button name={"Signup Now"} />
+              <Button name={"Signup Now"} />
+            </Suspense>
           </form>
-          <GoogleButton />
+          <Suspense fallback={<ButtonShimmer />}>
+            <GoogleButton />
+          </Suspense>
         </div>
       </div>
     </>

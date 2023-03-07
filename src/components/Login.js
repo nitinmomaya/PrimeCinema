@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../slice/userSlice";
 import authchanged from "../utils/authchanged";
+import InputShimmer from "../Shimmer/InputShimmer";
+import ButtonShimmer from "../Shimmer/ButtonShimmer";
 const Button = lazy(() => import("../UI/Button"));
 const GoogleButton = lazy(() => import("../UI/GoogleButton"));
 const Input = lazy(() => import("../UI/Input"));
@@ -91,7 +93,7 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <Suspense fallback={<h1>Loading</h1>}>
+            <Suspense fallback={<InputShimmer />}>
               <Input
                 label={"Email"}
                 name={"email"}
@@ -119,7 +121,7 @@ const Login = () => {
               <Button name={"Login Now"} />
             </Suspense>
           </form>
-          <Suspense fallback={<h1>Loading..</h1>}>
+          <Suspense fallback={<ButtonShimmer />}>
             <GoogleButton />
           </Suspense>
         </div>

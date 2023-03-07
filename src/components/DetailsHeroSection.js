@@ -68,7 +68,7 @@ const DetailsHeroSection = ({ video, crew }) => {
                 </p>
               </div>
 
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<div className="w-8 h-2 bg-slate-50"></div>}>
                 <Genres data={detailGenres} />
               </Suspense>
 
@@ -170,7 +170,9 @@ const DetailsHeroSection = ({ video, crew }) => {
                 )}
               </div>
             </div>
-            <Suspense fallback={<h1>Loading...</h1>}>
+            <Suspense
+              fallback={<div className="w-full h-full bg-slate-900"></div>}
+            >
               <VideoPlayer
                 show={show}
                 setShow={setShow}

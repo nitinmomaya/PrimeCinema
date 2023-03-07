@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
+import CarouselShimmer from "../Shimmer/CarouselShimmer";
+import HeroShimmer from "../Shimmer/HeroShimmer";
 import useFetch from "../utils/useFetch";
 const DetailsHeroSection = lazy(() => import("./DetailsHeroSection"));
 const TopCast = lazy(() => import("./TopCast"));
@@ -22,18 +24,18 @@ const Details = () => {
   );
   return (
     <>
-      <Suspense fallback={<h1>Loading..</h1>}>
+      <Suspense fallback={<HeroShimmer />}>
         <DetailsHeroSection video={data?.results?.[0]} crew={credits?.crew} />
       </Suspense>
       <div className="w-full h-full xl:px-60 px-8 py-0 bg-slate-900 font-display">
-        <Suspense fallback={<h1>Loading..</h1>}>
+        <Suspense fallback={<CarouselShimmer />}>
           <TopCast data={credits?.cast} loading={creditsLoading} />
         </Suspense>
         <div>
           <h1 className="text-slate-50 font-semibold text-xl ">
             Recommendation
           </h1>
-          <Suspense fallback={<h1>Loading...</h1>}>
+          <Suspense fallback={<CarouselShimmer />}>
             <Carousel
               data={recommendations?.results}
               loading={recommendationLoading}

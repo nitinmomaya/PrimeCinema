@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import SearchShimmer from "../Shimmer/SearchShimmer";
 
 import { selectUser } from "../slice/userSlice";
 import useFetch from "../utils/useFetch";
@@ -46,7 +47,7 @@ const HeroSection = () => {
             PrimeCinema
           </p>
 
-          <Suspense fallback={<h1>Loading..</h1>}>
+          <Suspense fallback={<SearchShimmer />}>
             <HeroSearch />
           </Suspense>
         </div>

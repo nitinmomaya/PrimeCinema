@@ -1,4 +1,6 @@
 import { lazy, Suspense } from "react";
+import CarouselShimmer from "../Shimmer/CarouselShimmer";
+import HeroShimmer from "../Shimmer/HeroShimmer";
 const HeroSection = lazy(() => import("./HeroSection"));
 const TrendingCarousel = lazy(() =>
   import("./CarouselSections/TrendingCarousel")
@@ -9,11 +11,11 @@ const PopularCarousel = lazy(() =>
 const Home = () => {
   return (
     <>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<HeroShimmer />}>
         <HeroSection />
       </Suspense>
       <div className="w-full h-full xl:px-60 px-8 py-0 bg-slate-900 font-display">
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<CarouselShimmer />}>
           <TrendingCarousel />
           <PopularCarousel />
         </Suspense>
