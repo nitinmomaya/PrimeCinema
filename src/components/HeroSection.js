@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { selectUser } from "../slice/userSlice";
 import useFetch from "../utils/useFetch";
-import HeroSearch from "./HeroSearch";
+
+const HeroSearch = lazy(() => import("./HeroSearch"));
 
 const HeroSection = () => {
   const user = useSelector(selectUser);
@@ -45,7 +46,9 @@ const HeroSection = () => {
             PrimeCinema
           </p>
 
-          <HeroSearch />
+          <Suspense fallback={<h1>Loading..</h1>}>
+            <HeroSearch />
+          </Suspense>
         </div>
       </div>
     </>

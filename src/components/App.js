@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
-
-import { createBrowserRouter, Outlet } from "react-router-dom";
-import Login from "./Login";
-import Signup from "./Signup";
-import ProtectedRoute from "./ProtectedRoute";
-import Home from "./Home";
-import Navbar from "./Navbar";
-
-import authchanged from "../utils/authchanged";
+import React, { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "../slice/homeSlice";
-import Footer from "./Footer";
-import Error from "../Error/Error";
-import Details from "./Details";
-import SearchResult from "./SearchResult";
-import Explore from "./Explore";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { fetchAPI } from "../utils/fetchAPI";
+import authchanged from "../utils/authchanged";
+import Login from "./Login";
+const Signup = lazy(() => import("./Signup"));
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
+const Home = lazy(() => import("./Home"));
+const Navbar = lazy(() => import("./Navbar"));
+const Footer = lazy(() => import("./Footer"));
+const Error = lazy(() => import("../Error/Error"));
+const Details = lazy(() => import("./Details"));
+const SearchResult = lazy(() => import("./SearchResult"));
+const Explore = lazy(() => import("./Explore"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,9 +58,13 @@ const App = () => {
   };
   return (
     <>
-      <Navbar />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Navbar />
+      </Suspense>
       <Outlet />
-      <Footer />
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Footer />
+      </Suspense>
     </>
   );
 };
@@ -72,15 +74,45 @@ export const appRouter = createBrowserRouter([
     path: "/",
     errorElement: <Error />,
     element: (
-      <ProtectedRoute>
-        <App />
-      </ProtectedRoute>
+      <Suspense fallback={<h1>Loading..</h1>}>
+        <ProtectedRoute>
+          <App />
+        </ProtectedRoute>
+      </Suspense>
     ),
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/:mediaType/:id", element: <Details /> },
-      { path: "/search/:searchValue", element: <SearchResult /> },
-      { path: "/explore/:mediaType", element: <Explore /> },
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/:mediaType/:id",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Details />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/search/:searchValue",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <SearchResult />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/explore/:mediaType",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Explore />
+          </Suspense>
+        ),
+      },
     ],
   },
 
@@ -91,7 +123,11 @@ export const appRouter = createBrowserRouter([
 
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Signup />
+      </Suspense>
+    ),
   },
 ]);
 

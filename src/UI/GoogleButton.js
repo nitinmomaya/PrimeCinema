@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import google from "../Assest/Google-Logo.png";
-
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 import { auth, signInWithPopup, GoogleAuthProvider } from "../../firebase";
@@ -43,7 +42,7 @@ const GoogleButton = () => {
           onClick={handleGoogleSignin}
           className="w-full flex justify-center items-center px-4 py-4 my-2 border-[1px] border-neutral-200 bg-white font-semibold text-neutral-900 rounded-md hover:bg-neutral-50"
         >
-          <img src={google} className="w-6 h-6 mx-2" />
+          <img rel="preload" as="image" src={google} className="w-6 h-6 mx-2" />
           Continue with Google
         </button>
       </div>

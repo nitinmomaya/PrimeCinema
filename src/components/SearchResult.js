@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import MovieCard from "../UI/MovieCard";
 import { fetchAPI } from "../utils/fetchAPI";
-import SearchHeroSection from "./SearchHeroSection";
+const MovieCard = lazy(() => import("../UI/MovieCard"));
+const SearchHeroSection = lazy(() => import("./SearchHeroSection"));
+import noImage from "../Assest/NoImage.png";
 const SearchResult = () => {
   const [data, setData] = useState(null);
 
@@ -49,7 +50,9 @@ const SearchResult = () => {
       {!loading && data?.results?.length > 0 ? (
         <div className="w-full flex flex-col  font-display bg-slate-900">
           <div>
-            <SearchHeroSection data={data} loading={loading} />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <SearchHeroSection data={data} loading={loading} />
+            </Suspense>
             <h1 className="text-slate-50 text-xl  pb-4 bg-slate-900 xl:px-60 px-8 gap-10">
               {`Search ${
                 data?.total_results > 1 ? "results" : "result"
@@ -62,32 +65,33 @@ const SearchResult = () => {
             next={fetchNextPageData}
             hasMore={pageNum <= data?.total_pages}
             loader={<h1>Loading</h1>}
-            style={""}
           >
             {data?.results.map((item) => {
               if (item.media_type === "person") return;
               const posterUrl = item?.poster_path
                 ? url?.poster + item.poster_path
-                : "";
+                : noImage;
               return (
                 <Link
                   key={item.id}
                   to={`/${item.media_type || endpoint}/${item.id}`}
                 >
-                  <MovieCard
-                    posterUrl={posterUrl}
-                    title={item?.title || item?.name}
-                    vote={item?.vote_average}
-                    genre={item?.genre_ids}
-                    date={item?.first_air_date || item?.release_date}
-                  />
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <MovieCard
+                      posterUrl={posterUrl}
+                      title={item?.title || item?.name}
+                      vote={item?.vote_average}
+                      genre={item?.genre_ids}
+                      date={item?.first_air_date || item?.release_date}
+                    />
+                  </Suspense>
                 </Link>
               );
             })}
           </InfiniteScroll>
         </div>
       ) : (
-        <div className="resultNotFound">Sorry, Results not found!</div>
+        <div className="pt-80 text-slate-90">Sorry, Results not found!</div>
       )}
     </>
   );

@@ -1,12 +1,13 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { FiPlay, FiStar } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { noImage } from "../contant";
 import useFetch from "../utils/useFetch";
-import Genres from "./Genres";
-import VideoPlayer from "./VideoPlayer";
+
+const Genres = lazy(() => import("./Genres"));
+const VideoPlayer = lazy(() => import("./VideoPlayer"));
 
 const DetailsHeroSection = ({ video, crew }) => {
   const { mediaType, id } = useParams();
@@ -67,7 +68,9 @@ const DetailsHeroSection = ({ video, crew }) => {
                 </p>
               </div>
 
-              <Genres data={detailGenres} />
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <Genres data={detailGenres} />
+              </Suspense>
 
               <div
                 className="flex cursor-pointer w-fit gap-2 text-slate-50 bg-black/70 p-4 hover:bg-black/30  rounded-md mt-4  items-center justify-center"
@@ -167,12 +170,14 @@ const DetailsHeroSection = ({ video, crew }) => {
                 )}
               </div>
             </div>
-            <VideoPlayer
-              show={show}
-              setShow={setShow}
-              videoId={videoId}
-              setVideoId={setVideoId}
-            />
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <VideoPlayer
+                show={show}
+                setShow={setShow}
+                videoId={videoId}
+                setVideoId={setVideoId}
+              />
+            </Suspense>
           </div>
         </div>
       )}

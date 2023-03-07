@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
+import { lazy, Suspense } from "react";
 import { FiStar } from "react-icons/fi";
-import Genres from "../components/Genres";
 
+const Genres = lazy(() => import("../components/Genres"));
 const MovieCard = ({ posterUrl, title, vote, date, genre, explore }) => {
   return (
     <div
@@ -24,7 +25,9 @@ const MovieCard = ({ posterUrl, title, vote, date, genre, explore }) => {
           <FiStar className="w-4 h-4 fill-white " />
           {vote.toFixed(1)}
         </div>
-        <Genres data={genre.slice(0, 1)} />
+        <Suspense fallback={<h1>Loading..</h1>}>
+          <Genres data={genre.slice(0, 1)} />
+        </Suspense>
         <div className="text-lg font-semibold">{title}</div>
         <div className="title text-slate-400">
           {dayjs(date).format("MMM D, YYYY")}

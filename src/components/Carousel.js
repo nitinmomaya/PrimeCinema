@@ -1,10 +1,10 @@
-import { useRef } from "react";
+import { lazy, Suspense, useRef } from "react";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import noImage from "../Assest/NoImage.png";
-import MovieCard from "../UI/MovieCard";
 
+const MovieCard = lazy(() => import("../UI/MovieCard"));
 const Carousel = ({ data, loading, endpoint }) => {
   const carouselRef = useRef();
   const { url } = useSelector((state) => state.home);
@@ -54,13 +54,15 @@ const Carousel = ({ data, loading, endpoint }) => {
                   key={item.id}
                   to={`/${item.media_type || endpoint}/${item.id}`}
                 >
-                  <MovieCard
-                    posterUrl={posterUrl}
-                    title={item?.title || item?.name}
-                    vote={item?.vote_average}
-                    genre={item?.genre_ids}
-                    date={item?.first_air_date || item?.release_date}
-                  />
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <MovieCard
+                      posterUrl={posterUrl}
+                      title={item?.title || item?.name}
+                      vote={item?.vote_average}
+                      genre={item?.genre_ids}
+                      date={item?.first_air_date || item?.release_date}
+                    />
+                  </Suspense>
                 </Link>
               );
             })}
@@ -72,8 +74,3 @@ const Carousel = ({ data, loading, endpoint }) => {
 };
 
 export default Carousel;
-// let d = new Date(2010, 7, 5);
-// let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
-// let mo = new Intl.DateTimeFormat("en", { month: "short" }).format(d);
-// let da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
-// console.log(`${da}-${mo}-${ye}`);

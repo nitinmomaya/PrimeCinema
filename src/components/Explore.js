@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Select from "react-select";
 import { sortByData } from "../contant";
-import MovieCard from "../UI/MovieCard";
 import { fetchAPI } from "../utils/fetchAPI";
 import useFetch from "../utils/useFetch";
-
+import noImage from "../Assest/NoImage.png";
+const MovieCard = lazy(() => import("../UI/MovieCard"));
 let filters = {};
 
 const Explore = () => {
@@ -123,21 +123,23 @@ const Explore = () => {
                   if (item.media_type === "person") return;
                   const posterUrl = item?.poster_path
                     ? url?.poster + item.poster_path
-                    : "";
+                    : noImage;
                   return (
                     <Link
                       key={item.id}
                       to={`/${item.media_type || mediaType}/${item.id}`}
                     >
-                      <MovieCard
-                        key={item.id}
-                        posterUrl={posterUrl}
-                        title={item?.title || item?.name}
-                        vote={item?.vote_average}
-                        genre={item?.genre_ids}
-                        date={item?.first_air_date || item?.release_date}
-                        explore={true}
-                      />
+                      <Suspense fallback={<h1>Card...</h1>}>
+                        <MovieCard
+                          key={item.id}
+                          posterUrl={posterUrl}
+                          title={item?.title || item?.name}
+                          vote={item?.vote_average}
+                          genre={item?.genre_ids}
+                          date={item?.first_air_date || item?.release_date}
+                          explore={true}
+                        />
+                      </Suspense>
                     </Link>
                   );
                 })}

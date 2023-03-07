@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ErrorImage from "../Assest/Not-Found.svg";
+import ErrorImage from "../Assest/Not-Found.jpg";
 import Button from "../UI/Button";
 const Error = () => {
   return (

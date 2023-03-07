@@ -1,13 +1,13 @@
 import { auth, signInWithEmailAndPassword } from "../../firebase";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../slice/userSlice";
-import Button from "../UI/Button";
-import GoogleButton from "../UI/GoogleButton";
-import Input from "../UI/Input";
 import authchanged from "../utils/authchanged";
+const Button = lazy(() => import("../UI/Button"));
+const GoogleButton = lazy(() => import("../UI/GoogleButton"));
+const Input = lazy(() => import("../UI/Input"));
 
 const Login = () => {
   const initialValues = {
@@ -56,7 +56,11 @@ const Login = () => {
 
   return (
     <>
-      <div className=" w-full  flex xl:flex-row flex-col xl:px-28 sm:px-12 px-8 py-8  justify-between items-center xl:h-screen h-full space-y-6 bg-login-background bg-cover font-display ">
+      <div
+        rel="preload"
+        as="image"
+        className=" w-full  flex xl:flex-row flex-col xl:px-28 sm:px-12 px-8 py-8  justify-between items-center xl:h-screen h-full space-y-6 bg-login-background bg-cover font-display "
+      >
         <div className="flex flex-col text-white xl:w-1/2 w-full  sm:space-y-6 space-y-2">
           <h1 className="font-semibold sm:text-5xl text-xl ">
             Looking for Good Movie Recommendation to watch?
@@ -87,33 +91,37 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <Input
-              label={"Email"}
-              name={"email"}
-              type={"email"}
-              value={values.email}
-              touched={touched.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errors={errors.email}
-              placeholder={"Enter Email"}
-            />
-            <Input
-              label={"Password"}
-              name={"password"}
-              type={"password"}
-              value={values.password}
-              touched={touched.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              errors={errors.password}
-              icon={true}
-              placeholder={"Enter Password"}
-            />
+            <Suspense fallback={<h1>Loading</h1>}>
+              <Input
+                label={"Email"}
+                name={"email"}
+                type={"email"}
+                value={values.email}
+                touched={touched.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors.email}
+                placeholder={"Enter Email"}
+              />
+              <Input
+                label={"Password"}
+                name={"password"}
+                type={"password"}
+                value={values.password}
+                touched={touched.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors.password}
+                icon={true}
+                placeholder={"Enter Password"}
+              />
 
-            <Button name={"Login Now"} />
+              <Button name={"Login Now"} />
+            </Suspense>
           </form>
-          <GoogleButton />
+          <Suspense fallback={<h1>Loading..</h1>}>
+            <GoogleButton />
+          </Suspense>
         </div>
       </div>
     </>

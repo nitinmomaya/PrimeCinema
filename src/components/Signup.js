@@ -65,7 +65,11 @@ const Signup = () => {
 
   return (
     <>
-      <div className="w-full  flex xl:flex-row flex-col xl:px-28 sm:px-12 px-8 py-8  justify-between items-center xl:h-screen h-full space-y-6 bg-singup-background bg-cover font-display">
+      <div
+        rel="preload"
+        as="image"
+        className="w-full  flex xl:flex-row flex-col xl:px-28 sm:px-12 px-8 py-8  justify-between items-center xl:h-screen h-full space-y-6 bg-singup-background bg-cover font-display"
+      >
         <div className="flex flex-col text-white xl:w-1/2 w-full  sm:space-y-6 space-y-2">
           <h1 className="font-semibold sm:text-5xl text-xl">
             Experience the New Generation of Watching Movie

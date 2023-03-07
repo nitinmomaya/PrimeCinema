@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import HeroSearch from "./HeroSearch";
+const HeroSearch = lazy(() => import("./HeroSearch"));
 
 const SearchHeroSection = ({ data, loading }) => {
   console.log("ser", data);
@@ -38,7 +38,9 @@ const SearchHeroSection = ({ data, loading }) => {
             Search any Movie and Shows all available on PrimeCinema
           </p>
 
-          <HeroSearch />
+          <Suspense fallback={<h1>Loading..</h1>}>
+            <HeroSearch />
+          </Suspense>
         </div>
       </div>
     </>

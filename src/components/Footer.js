@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div className="bg-slate-900 h-1/2 w-full flex flex-wrap flex-col sm:flex-row justify-between items-start sm:px-24 px-8 py-8 mt-auto">
+      <div className="bg-slate-800 h-1/2 w-full flex flex-wrap flex-col sm:flex-row justify-between items-start sm:px-24 px-8 py-8 mt-auto">
         <div className="py-4">
           <ul>
             <p className=" font-display text-slate-50 font-bold text-2xl pb-4 ">
@@ -77,7 +77,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-center  py-4 bg-slate-900">
+      <div className="flex flex-col justify-center items-center text-center  py-4 bg-slate-800 px-8">
         <h1 className=" text-slate-50 font-semibold font-display">
           © 2023 All rights reserved | Build with ❤ by
           <span className="hover:text-slate-600 font-semibold cursor-pointer font-display mx-1">
