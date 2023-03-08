@@ -24,7 +24,6 @@ const DetailsHeroSection = ({ video, crew }) => {
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
   const imgurl = url?.backdrop + data?.backdrop_path;
-
   const toHoursAndMinutes = (totalMinutes) => {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;

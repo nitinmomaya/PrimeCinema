@@ -1,6 +1,7 @@
 import {
   auth,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "../../firebase";
 import { useFormik } from "formik";
@@ -36,6 +37,20 @@ const Signup = () => {
         action.resetForm();
       },
     });
+
+  const handleDemo = () => {
+    signInWithEmailAndPassword(auth, "recruiter@hireme.com", "123456").then(
+      () => {
+        dispatch(
+          login({
+            email: "recruiter@hireme.com",
+            name: "123456",
+          })
+        );
+        navigate("/");
+      }
+    );
+  };
 
   const handleSignup = (email, password, name) => {
     // Create a new user with Firebase
@@ -82,7 +97,7 @@ const Signup = () => {
           </p>
         </div>
         <div className="xl:w-1/3 w-full h-fit bg-white rounded-md sm:p-8 p-6">
-          <div className="flex justify-between items-center  mb-6">
+          <div className="flex sm:justify-between sm:items-center sm:flex-row flex-col space-y-4 mb-6">
             <div className="flex flex-col">
               <h1 className="text-neutral-900 font-semibold text-2xl">
                 Signup Here
@@ -94,11 +109,19 @@ const Signup = () => {
               )}
             </div>
 
-            <Link to="/login">
-              <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
-                Login
+            <div className="flex gap-4">
+              <Link to="/login">
+                <button className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white ">
+                  login
+                </button>
+              </Link>
+              <button
+                onClick={handleDemo}
+                className="px-4 py-2 border-[1px] rounded-md border-black text-black font-semibold hover:bg-black hover:text-white "
+              >
+                Demo Login
               </button>
-            </Link>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit}>
